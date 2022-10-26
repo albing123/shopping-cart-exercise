@@ -1,31 +1,37 @@
-//Variables to use and it's a mix of global and local variables
 let shoppingCart = [];
-let products = document.getElementsByTagName('button');
-let cartProducts = '';
+let products = document.getElementsByTagName("button");
 
-//This code gets whatever is inside data-product in the HTML
-let product = event.target.parentNode.getAttribute('data-product');
-cartProducts += '<li><span class="product-title">Titel: </span>' + shoppingCart[i] + '</li>';
-shoppingCart.push(product);
+for (let i = 0; i < products.length; i++) {
+  products[i].addEventListener("click", function (event) {
+    let product = event.target.parentNode.getAttribute("data-product");
 
-//
-document.getElementById('productsInCart').innerHTML = shoppingCart.length;
-document.getElementById('cart').classList.toggle('hide');
-document.getElementById('products').innerHTML = cartProducts;
-products[i].addEventListener('click', function(event) {});
-document.getElementById('open-cart').addEventListener('click', function() {});
+    shoppingCart.includes(product)
+      ? alert("Book already in basket")
+      : shoppingCart.push(product);
 
-//Function declarations, add code inside {}
-function updateCart() {}
-function listProductsInCart() {}
+    updateCart();
+  });
+}
 
+function updateCart() {
+  let cartProducts = "";
+  for (let i = 0; i < shoppingCart.length; i++) {
+    cartProducts +=
+      `<li><span class="product-title">Titel: </span>` +
+      shoppingCart[i] +
+      `</li>`;
+  }
 
-//For-loops of two arrays
-for(let i = 0; i < shoppingCart.length; i++) {}
-for(let i = 0; i < products.length; i++) {}
+  document.getElementById("products").innerHTML = cartProducts;
+  listProductsInCart();
+}
 
+function listProductsInCart() {
+  document.getElementById("productsInCart").innerHTML = shoppingCart.length;
+}
 
-//Function calls and there should be two listProductsInCart()
-updateCart();
 listProductsInCart();
-listProductsInCart();
+
+document.getElementById("open-cart").addEventListener("click", function () {
+  document.getElementById("cart").classList.toggle("hide");
+});
