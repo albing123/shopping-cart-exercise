@@ -13,13 +13,23 @@ for (let i = 0; i < products.length; i++) {
   });
 }
 
+function deleteProductFromCart(index) {
+  shoppingCart.splice(index, 1);
+  updateCart();
+}
+
 function updateCart() {
   let cartProducts = "";
   for (let i = 0; i < shoppingCart.length; i++) {
     cartProducts +=
       `<li><span class="product-title">Titel: </span>` +
       shoppingCart[i] +
-      `</li>`;
+      `</li>` +
+      `
+    <li>
+      <button onclick="deleteProductFromCart(${i})">Delete</button>
+    </li>
+  `;
   }
 
   document.getElementById("products").innerHTML = cartProducts;
